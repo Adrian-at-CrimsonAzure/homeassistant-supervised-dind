@@ -2,6 +2,7 @@ FROM docker:dind
 
 # Put our scripts in /usr/bin
 ADD ha hassio-supervisor startup.sh /usr/bin/
+ADD hassio.json /etc/
 
     # Install the packages we need
 RUN apk add --no-cache curl jq dbus; \
