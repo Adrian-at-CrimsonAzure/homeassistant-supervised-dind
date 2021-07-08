@@ -9,7 +9,6 @@ RUN apk add curl jq dbus
 RUN dbus-uuidgen > /etc/machine-id
 
 # Put our files where they need to be
-ADD hassio.json /etc/
 ADD ha /usr/bin/
 ADD hassio-supervisor /usr/sbin/
 ADD startup.sh /app/
