@@ -63,4 +63,4 @@ Obviously you aren't running on bare metal, so any hardware you wish to interfac
 | 4 | Operating System                    | Well we're running Alpine and I don't feel like recreating the base Docker and DIND images in Debian. Plus Alpine is lighter. |
 | 5 | Network Manager                     | I have a feeling that implementing this would break other things.                                                             |
 
-I have a feeling that rebuilding from debian:buster would fix 3-5, but that's a lot of debugging.
+In the debian folder of this repo is a version of DIND that runs on Buster, but `systemd`, `apparmor`, and `networkmanager` don't work anyways so there's really no point.
