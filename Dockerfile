@@ -1,23 +1,18 @@
 FROM docker:dind
 
-# Make all of our directories
-RUN mkdir -p /usr/share/hassio/docker
-VOLUME /usr/share/hassio
+# Put our scripts in /usr/bin
+ADD ha hassio-supervisor startup.sh /usr/bin/
 
-RUN apk add curl jq dbus
-
-RUN dbus-uuidgen > /etc/machine-id
-
-# Put our files where they need to be
-ADD ha /usr/bin/
-ADD hassio-supervisor /usr/sbin/
-ADD startup.sh /app/
-
-# Fix perms
-RUN chmod +x /usr/bin/ha /usr/sbin/hassio-supervisor /app/startup.sh
+    # Install the packages we need
+RUN apk add --no-cache curl jq dbus; \
+    # Generate a machine-id
+    dbus-uuidgen > /etc/machine-id; \
+    # Fix perms
+    # Fix perms
+    chmod +x /usr/bin/ha /usr/bin/hassio-supervisor /usr/bin/startup.sh;
 
 EXPOSE 8123
+VOLUME /usr/share/hassio
 
-ENTRYPOINT ["/app/startup.sh"]
-
+ENTRYPOINT ["/usr/bin/startup.sh"]
 CMD ["sh"]
