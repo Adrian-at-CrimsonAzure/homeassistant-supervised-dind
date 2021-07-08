@@ -2,6 +2,7 @@
 Home Assistant Supervised inside a Docker container with full add-on support.
 
 ## Installation
+Note: as of this commit this image only supports the `amd64-hassio-supervisor` image, it should be trivial to modify this if there's demand.
 ### Docker run (bind):
 ```bash
 docker run --privileged -p 8123:8123 --mount type=bind,source="[HASSIO STORAGE]",target=/usr/share/hassio --mount type=bind,source="[DOCKER STORAGE]",target=/var/lib/docker --name hass crimsonazure/homeassistant-supervised-dind 
@@ -64,3 +65,6 @@ Obviously you aren't running on bare metal, so any hardware you wish to interfac
 | 5 | Network Manager                     | I have a feeling that implementing this would break other things.                                                             |
 
 In the debian folder of this repo is a version of DIND that runs on Buster, but `systemd`, `apparmor`, and `networkmanager` don't work anyways so there's really no point.
+
+## Contributing
+I am open to PRs that add features or fix issues. If you have an idea, submit a Feature Request.
