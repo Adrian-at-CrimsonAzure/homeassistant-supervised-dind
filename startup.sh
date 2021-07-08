@@ -13,4 +13,4 @@ done
 
 docker image pull homeassistant/amd64-hassio-supervisor
 
-/usr/sbin/hassio-supervisor
+/usr/bin/hassio-supervisor
