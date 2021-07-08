@@ -37,16 +37,19 @@ version: "3.8"
 
 volumes:
   data:
-    name: hass_data
   docker_data:
-    name: hass_docker_data
   
 services:
   launch_hass:
     image: docker
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: sh -c "docker run --privileged -p 8123:8123 -v hass_data:/usr/share/hassio -v hass_docker_data:/var/lib/docker --name hass crimsonazure/homeassistant-supervised-dind"
+    command: sh -c "docker container stop hass && docker container rm hass && docker run --privileged -p 8123:8123 -v hass_data:/usr/share/hassio -v hass_docker_data:/var/lib/docker --name hass --network='Hass_default' crimsonazure/homeassistant-supervised-dind"
+    
+
+networks:
+  default:
+    attachable: true
 ```
 Unfortunately even though `privileged: true` is technically supported in swarm it doesn't seem to work. This is a little workaround shamelessly stolen from [Bret Fisher](https://github.com/BretFisher/dogvscat/blob/master/stack-rexray.yml) to start the container with the `--privileged` flag within a swarm stack.
 
