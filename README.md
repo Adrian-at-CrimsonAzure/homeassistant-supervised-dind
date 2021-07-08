@@ -1,4 +1,4 @@
-# Home Assistant in Docker with add-on support
+# [Home Assistant in Docker with add-on support](https://github.com/Adrian-at-CrimsonAuzre/homeassistant-supervised-dind)
 Home Assistant Supervised inside a Docker container with full add-on support.
 
 ## Installation
@@ -37,15 +37,16 @@ version: "3.8"
 
 volumes:
   data:
+    name: hass_data
   docker_data:
+    name: hass_docker_data
   
 services:
   launch_hass:
     image: docker
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: sh -c "docker container stop hass && docker container rm hass && docker run --privileged -p 8123:8123 -v hass_data:/usr/share/hassio -v hass_docker_data:/var/lib/docker --name hass --network='Hass_default' crimsonazure/homeassistant-supervised-dind"
-    
+    command: sh -c "docker stop hass || true && docker rm hass || true && docker run --privileged -p 8123:8123 -v hass_data:/usr/share/hassio -v hass_docker_data:/var/lib/docker --network='Hass_default' --name hass crimsonazure/homeassistant-supervised-dind"
 
 networks:
   default:
