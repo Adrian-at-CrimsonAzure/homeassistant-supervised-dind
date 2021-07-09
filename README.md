@@ -63,7 +63,7 @@ Obviously you aren't running on bare metal, so any hardware you wish to interfac
 |   |                                     |                                                                                                                               |
 |---|-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | 1 | Docker Configuration                | DIND doesn't support  `overlay2`  and  `journald` only works when systemd is installed                                        |
-| 2 | AppArmor is not enabled on the host | [Need to try installing] ( https://unix.stackexchange.com/questions/493896/how-to-install-apparmor-on-alpine)                 |
+| 2 | AppArmor is not enabled on the host | No kernel support from the base image, I don't want to create a custom kernel for a docker image either                       |
 | 3 | Systemd                             | Not installed, would have to build it from source, and the only examples I've found don't work                                |
 | 4 | Operating System                    | Well we're running Alpine and I don't feel like recreating the base Docker and DIND images in Debian. Plus Alpine is lighter. |
 | 5 | Network Manager                     | I have a feeling that implementing this would break other things.                                                             |
